@@ -5,6 +5,7 @@ import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Button } from './Button/Button';
 import { Loader } from './Loader/Loader';
 import { ModalWindow } from './Modal/Modal';
+import { AppContainer } from './Styled';
 export class App extends React.Component {
   state = {
     images: [],
@@ -18,6 +19,10 @@ export class App extends React.Component {
 
   componentDidUpdate(_, prevState) {
     if (this.state.query !== prevState.query) {
+      this.setState({
+        page: 1,
+        images: [],
+      });
       this.fetchImages();
     }
     if (this.state.page !== prevState.page) {
@@ -67,16 +72,7 @@ export class App extends React.Component {
 
   render() {
     return (
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101',
-        }}
-      >
+      <AppContainer>
         <Searchbar setQuery={this.setQuery}></Searchbar>
         {this.state.images.length > 0 && (
           <>
@@ -94,7 +90,7 @@ export class App extends React.Component {
             modalData={this.state.modalData}
           />
         )}
-      </div>
+      </AppContainer>
     );
   }
 }

@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types';
 import { Component } from 'react';
-
+import { SearchbarImage, Form, FormButton, InputForm } from './Styled';
 export class Searchbar extends Component {
   state = {
     query: '',
@@ -19,13 +19,16 @@ export class Searchbar extends Component {
 
   render() {
     return (
-      <header className="searchbar">
-        <form className="form" onSubmit={this.handleSubmit}>
-          <button type="submit" className="button">
-            <span className="button-label">Search</span>
-          </button>
+      <SearchbarImage className="searchbar">
+        <Form className="form" onSubmit={this.handleSubmit}>
+          <FormButton type="submit" className="button">
+            <img
+              src="https://img.icons8.com/ios-glyphs/30/null/search--v1.png"
+              alt="seach"
+            />
+          </FormButton>
 
-          <input
+          <InputForm
             className="input"
             name="search"
             onChange={this.handleChange}
@@ -35,8 +38,8 @@ export class Searchbar extends Component {
             autoFocus
             placeholder="Search images and photos"
           />
-        </form>
-      </header>
+        </Form>
+      </SearchbarImage>
     );
   }
 }

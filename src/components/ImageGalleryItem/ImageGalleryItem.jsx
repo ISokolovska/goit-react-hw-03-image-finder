@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ImageItem, ImageItemShow } from './Styled';
 
 export const ImageGalleryItem = ({
   image: { id, tags, webformatURL, largeImageURL },
   toggleModal,
 }) => {
   return (
-    <li
+    <ImageItem
       className="gallery-item"
       onClick={() => {
         toggleModal({ tags, largeImageURL });
       }}
     >
-      <img src={webformatURL} alt={tags} />
-    </li>
+      <ImageItemShow src={webformatURL} alt={tags} />
+    </ImageItem>
   );
 };
 
