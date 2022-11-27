@@ -23,15 +23,14 @@ export class App extends React.Component {
         page: 1,
         images: [],
       });
-      console.log(this.state.query, this.state.page);
-      await this.fetchImages();
+      await this.fetchImages(this.state.query, 1);
     }
     if (
       this.state.page !== prevState.page &&
       this.state.query === prevState.query &&
       this.state.page !== 1
     ) {
-      await this.fetchImages();
+      await this.fetchImages(this.state.query, this.state.page);
     }
   }
 
@@ -58,12 +57,12 @@ export class App extends React.Component {
     });
   };
 
-  async fetchImages() {
+  async fetchImages(query, page) {
     this.setState({
       isLoading: true,
     });
     try {
-      const data = await getImages(this.state.query, this.state.page);
+      const data = await getImages(query, page);
       this.setState(prevState => {
         return {
           images: [...prevState.images, ...data.hits],

@@ -1,5 +1,6 @@
 import { PropTypes } from 'prop-types';
 import { Component } from 'react';
+import Notiflix from 'notiflix';
 import { SearchbarImage, Form, FormButton, InputForm } from './Styled';
 export class Searchbar extends Component {
   state = {
@@ -14,7 +15,12 @@ export class Searchbar extends Component {
   handleSubmit = evt => {
     evt.preventDefault();
     const { query } = this.state;
-    this.props.setQuery(query);
+    const fixedQuery = query.trim();
+    if (fixedQuery === '') {
+      Notiflix.Notify.warning('Please enter a query !');
+      return;
+    }
+    this.props.setQuery(fixedQuery);
   };
 
   render() {
