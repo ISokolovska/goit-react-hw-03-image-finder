@@ -17,16 +17,21 @@ export class App extends React.Component {
     modalData: null,
   };
 
-  componentDidUpdate(_, prevState) {
+  async componentDidUpdate(_, prevState) {
     if (this.state.query !== prevState.query) {
       this.setState({
         page: 1,
         images: [],
       });
-      this.fetchImages();
+      console.log(this.state.query, this.state.page);
+      await this.fetchImages();
     }
-    if (this.state.page !== prevState.page) {
-      this.fetchImages();
+    if (
+      this.state.page !== prevState.page &&
+      this.state.query === prevState.query &&
+      this.state.page !== 1
+    ) {
+      await this.fetchImages();
     }
   }
 
